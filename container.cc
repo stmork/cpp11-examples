@@ -26,7 +26,15 @@ public:
 		this->name = e.name;
 		this->a    = e.a;
 		this->b    = e.b;
-		printf("x'tor() %p %s: a=%d b=%d\n", this, name.c_str(), a, b);
+		printf("x'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
+	}
+
+	element(element && e)
+	{
+		this->name = std::move(e.name);
+		this->a    = e.a;
+		this->b    = e.b;
+		printf("m'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
 	}
 
 	element(string name, int a, int b)
@@ -34,12 +42,12 @@ public:
 		this->name = name;
 		this->a    = a;
 		this->b    = b;
-		printf("c'tor() %p %s: a=%d b=%d\n", this, name.c_str(), a, b);
+		printf("c'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
 	}
 
 	virtual ~element()
 	{
-		printf("d'tor() %p %s: a=%d b=%d\n", this, name.c_str(), a, b);
+		printf("d'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
 	}
 
 	inline bool operator()(const element& left,const element& right)
@@ -49,7 +57,7 @@ public:
 
 	void print() const
 	{
-		printf("        %p %s: a=%d b=%d\n", this, name.c_str(), a, b);
+		printf("        %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
 	}
 };
 
@@ -70,7 +78,8 @@ static void test()
 	elements.insert(c);
 	elements.insert(d);
 	elements.insert(e);
-	elements.insert(f);
+	elements.insert(std::move(f));
+	elements.insert(element("Neun", 9, 92));
 	elements.emplace("Sechs", 6, 96);
 	elements.emplace("Sieben", 3, 192);
 	printf("< test()\n");
