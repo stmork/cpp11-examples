@@ -50,6 +50,15 @@ public:
 		printf("d'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
 	}
 
+	element &operator=(element && other)
+	{
+		name = std::move(other.name);
+		a = other.a;
+		b = other.b;
+		printf("m=op()  %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
+		return *this;
+	}
+
 	inline bool operator()(const element& left,const element& right)
 	{
 		return left.a	 < right.a;
