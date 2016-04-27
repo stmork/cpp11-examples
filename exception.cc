@@ -15,57 +15,69 @@ using namespace std;
 
 class TestException : public std::runtime_error
 {
-	char    error[1024];
-
 public:
-	explicit TestException(const char* message, ...) : std::runtime_error(error)
+	explicit TestException(const string &text) : std::runtime_error(text)
 	{
-		va_list args;
+	}
 
-		va_start(args, message);
-		vsnprintf(error, sizeof(error), message, args);
-		va_end(args);
+};
 
-		if (errno != 0)
+static const string format(const char* message, ...)
+{
+	char buffer[1024];
+
+	va_list args;
+
+	va_start(args, message);
+	vsnprintf(buffer, sizeof(buffer), message, args);
+	va_end(args);
+
+	string error(buffer);
+
+	if (errno != 0)
+	{
+		const char *result = strerror_r(errno, buffer, sizeof(buffer));
+
+		if (result == nullptr)
 		{
-			char    buffer[1024];
-
-			const char *result = strerror_r(errno, buffer, sizeof(buffer));
-
-			if (result == nullptr)
-			{
-				perror("Unknown error while retrieving another error text");
-			}
-			else
-			{
-				strncat (error, ": ", sizeof(error));
-				strncat (error, result, sizeof(error));
-			}
+			perror("Unknown error while retrieving another error text");
+		}
+		else
+		{
+			error += ": ";
+			error += result;
 		}
 	}
-
-	virtual const char *what() const throw()
-	{
-		return error;
-	}
-};
+	return error;
+}
 
 void first()
 {
 	open("asdfsdsdf", 0);
-	throw TestException("Beispiel");
+	throw TestException("Beispiel 1");
 }
 
-void intermediate()
+void second()
+{
+	open("asdfsdsdf", 0);
+	throw TestException(format("Beispiel %d", 2));
+}
+
+void intermediate1()
 {
 	first();
+}
+
+void intermediate2()
+{
+	second();
 }
 
 int main()
 {
 	try
 	{
-		intermediate();
+		intermediate2();
 	}
 	catch(std::runtime_error &e)
 	{
