@@ -1,15 +1,10 @@
-CXXFLAGS=-std=c++11 -g3
+CXXFLAGS	+=-std=c++11 -g3
+PRGS		 = container exception regex  constructor
 
-all:	container exception regex
+all:	$(PRGS)
 
 clean:
-	rm -rf *.o container exception
-
-container.o:	container.cc
-
-exception.o:	exception.cc
-
-regex.o:	regex.cc
+	rm -rf *.o $(PRGS)
 
 container:	container.o
 	$(LINK.cc) -o $@ $^
@@ -18,4 +13,7 @@ exception:	exception.o
 	$(LINK.cc) -o $@ $^
 
 regex:	regex.o
+	$(LINK.cc) -o $@ $^
+
+constructor:	constructor.o
 	$(LINK.cc) -o $@ $^
