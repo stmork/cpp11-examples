@@ -1,4 +1,4 @@
-CXXFLAGS	+=-std=c++11 -g3
+CXXFLAGS	+=-std=c++11 -g
 PRGS		 = container exception regex  constructor
 
 all:	$(PRGS)

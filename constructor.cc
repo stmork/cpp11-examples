@@ -4,26 +4,43 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdexcept>
 
-class Constructor
+class Base
 {
 public:
-	Constructor()
+	Base()
 	{
-		printf("c'tor()\n");
+		printf("c'tor() Base\n");
+	}
+
+	virtual ~Base()
+	{
+		printf("d'tor() Base\n");
+	}
+};
+
+class Derived : public Base
+{
+public:
+	Derived()
+	{
+		printf("c'tor() Derived\n");
 		throw std::runtime_error("Exception absichtig geworfen!");
 	}
 
-	virtual ~Constructor()
+	virtual ~Derived()
 	{
-		printf("d'tor()\n");
+		printf("d'tor() Derived\n");
 	}
 };
 
 int main()
 {
-	Constructor object;
+	Derived object;
 
-	return 0;
+	printf("Live time...\n");
+
+	return EXIT_SUCCESS;
 }
