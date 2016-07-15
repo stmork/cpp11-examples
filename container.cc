@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <set>
+#include <unordered_set>
 
 using namespace std;
 
@@ -28,7 +29,8 @@ public:
 		this->name = e.name;
 		this->a    = e.a;
 		this->b    = e.b;
-		printf("x'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
+		printf("x'tor() %p %s: a=%d b=%d name=%p\n",
+				this, name.c_str(), a, b, name.c_str());
 	}
 
 	element(element && e)
@@ -37,7 +39,8 @@ public:
 		this->a    = std::move(e.a);
 		this->b    = e.b;
 		e.b = 0;
-		printf("m'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
+		printf("m'tor() %p %s: a=%d b=%d name=%p\n",
+				this, name.c_str(), a, b, name.c_str());
 	}
 
 	element(string name, int a, int b)
@@ -45,12 +48,14 @@ public:
 		this->name = name;
 		this->a    = a;
 		this->b    = b;
-		printf("c'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
+		printf("c'tor() %p %s: a=%d b=%d name=%p\n",
+				this, name.c_str(), a, b, name.c_str());
 	}
 
 	virtual ~element()
 	{
-		printf("d'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
+		printf("d'tor() %p %s: a=%d b=%d name=%p\n",
+				this, name.c_str(), a, b, name.c_str());
 	}
 
 	element &operator=(element && other)
@@ -58,22 +63,30 @@ public:
 		name = std::move(other.name);
 		a = other.a;
 		b = other.b;
-		printf("m=op()  %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
+		printf("m=op()  %p %s: a=%d b=%d name=%p\n",
+				this, name.c_str(), a, b, name.c_str());
 		return *this;
+	}
+
+	inline size_t operator()(const element & x) const noexcept
+	{
+		return x.a;
 	}
 
 	inline bool operator()(const element& left,const element& right)
 	{
-		return left.a	 < right.a;
+		return left.a == right.a;
 	}
 
 	void print() const
 	{
-		printf("        %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
+		printf("        %p %s: a=%d b=%d name=%p\n",
+				this, name.c_str(), a, b, name.c_str());
 	}
 };
 
 static set<element, element> elements;
+static unordered_set<int> numbers;
 
 static void test()
 {
