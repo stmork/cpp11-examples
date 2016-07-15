@@ -18,6 +18,8 @@ class element
 public:
 	element()
 	{
+		a = 0;
+		b = 0;
 		printf("c'tor() %p\n", this);
 	}
 
@@ -32,8 +34,9 @@ public:
 	element(element && e)
 	{
 		this->name = std::move(e.name);
-		this->a    = e.a;
+		this->a    = std::move(e.a);
 		this->b    = e.b;
+		e.b = 0;
 		printf("m'tor() %p %s: a=%d b=%d name=%p\n", this, name.c_str(), a, b, name.c_str());
 	}
 
@@ -89,8 +92,8 @@ static void test()
 	elements.insert(e);
 	elements.insert(std::move(f));
 	elements.insert(element("Neun", 9, 92));
-	elements.emplace("Sechs", 6, 96);
-	elements.emplace("Sieben", 3, 192);
+	elements.emplace("Sechs (empl)", 6, 96);
+	elements.emplace("Sieben (empl)", 3, 192);
 	printf("< test()\n");
 }
 
