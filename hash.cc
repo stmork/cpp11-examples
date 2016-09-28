@@ -95,7 +95,7 @@ void test1()
 
 void test2()
 {
-
+	// Just for test purposes
 }
 
 int main()
@@ -109,6 +109,12 @@ int main()
 	insert(&set, (functype)main);
 	insert(&set, (functype)main);
 	insert(&set, (functype)test1);
+	insert(&set, (functype)printf);
+	insert(&set, (functype)sprintf);
+	insert(&set, (functype)snprintf);
+	insert(&set, (functype)vprintf);
+	insert(&set, (functype)vsprintf);
+	insert(&set, (functype)vsnprintf);
 	printf("%p %s\n", &test1, contains(&set, (functype)&test1) ? "yes" : "no");
 	printf("%p %s\n", &test2, contains(&set, (functype)&test2) ? "yes" : "no");
 	printf("%p %s\n", &main,  contains(&set, (functype)&main) ? "yes" : "no");
