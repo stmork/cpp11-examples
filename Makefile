@@ -1,5 +1,5 @@
 CXXFLAGS	+=-std=c++11 -g
-PRGS		 = container exception regex  constructor
+PRGS		 = container exception regex  constructor hash
 
 all:	$(PRGS)
 
