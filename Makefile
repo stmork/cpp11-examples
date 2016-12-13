@@ -5,7 +5,7 @@ PRGS		 = container exception regex  constructor hash
 all:	$(PRGS)
 
 depend:
-	$(CXX) -std=c++11 -E -M  $(SRC) $(CPPFLAGS) >.dep
+	$(CXX) -std=c++14 -E -M  $(SRC) $(CPPFLAGS) >.dep
 
 clean:
 	rm -rf *.o $(PRGS)
