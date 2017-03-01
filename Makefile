@@ -1,4 +1,5 @@
-CXXFLAGS	+=-std=c++11 -g
+CXXFLAGS	+= -std=c++11
+CXXFLAGS	+= -g
 SRC		 = container.cc exception.cc regex.cc constructor.cc hash.cc
 PRGS		 = container exception regex  constructor hash
 
