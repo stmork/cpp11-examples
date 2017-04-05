@@ -1,6 +1,9 @@
-/*
- * $Id$
- * $Author$
+/**
+ * @file    $Id$
+ * @version $Revision$
+ * @date    $Date$
+ * @author  $Author$
+ * @brief   constructor behaviour.
  */
 
 #include <stdio.h>

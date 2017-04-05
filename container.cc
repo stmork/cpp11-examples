@@ -1,6 +1,9 @@
-/*
- * $Id$
- * $Author$
+/**
+ * @file    $Id$
+ * @version $Revision$
+ * @date    $Date$
+ * @author  $Author$
+ * @brief   STL container reference behaviour.
  */
 
 #include <stdio.h>
