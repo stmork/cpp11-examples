@@ -1,8 +1,8 @@
 /**
  * @file    $Id$
- * @version $Revision$
- * @date    $Date$
- * @author  $Author$
+ * $Revision$
+ * $Date$
+ * $Author$
  * @brief   Simple hash implementation.
  */
 
