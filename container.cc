@@ -10,6 +10,7 @@
 #include <iostream>
 #include <set>
 #include <unordered_set>
+#include <vector>
 
 using namespace std;
 
@@ -32,8 +33,8 @@ public:
 		this->name = e.name;
 		this->a    = e.a;
 		this->b    = e.b;
-		printf("x'tor() %p %s: a=%d b=%d name=%p\n",
-				this, name.c_str(), a, b, name.c_str());
+		printf("x'tor() %p %s: a=%d b=%d len=%lu name=%p\n",
+				this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 
 	element(element && e)
@@ -42,8 +43,8 @@ public:
 		this->a    = std::move(e.a);
 		this->b    = e.b;
 		e.b = 0;
-		printf("m'tor() %p %s: a=%d b=%d name=%p\n",
-				this, name.c_str(), a, b, name.c_str());
+		printf("m'tor() %p %s: a=%d b=%d len=%lu name=%p\n",
+				this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 
 	element(string name, int a, int b)
@@ -51,14 +52,14 @@ public:
 		this->name = name;
 		this->a    = a;
 		this->b    = b;
-		printf("c'tor() %p %s: a=%d b=%d name=%p\n",
-				this, name.c_str(), a, b, name.c_str());
+		printf("c'tor() %p %s: a=%d b=%d len=%lu name=%p\n",
+				this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 
 	virtual ~element()
 	{
-		printf("d'tor() %p %s: a=%d b=%d name=%p\n",
-				this, name.c_str(), a, b, name.c_str());
+		printf("d'tor() %p %s: a=%d b=%d len=%lu name=%p\n",
+				this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 
 	element &operator=(element && other)
@@ -66,8 +67,8 @@ public:
 		name = std::move(other.name);
 		a = other.a;
 		b = other.b;
-		printf("m=op()  %p %s: a=%d b=%d name=%p\n",
-				this, name.c_str(), a, b, name.c_str());
+		printf("m=op()  %p %s: a=%d b=%d len=%lu name=%p\n",
+				this, name.c_str(), a, b, name.length(), name.c_str());
 		return *this;
 	}
 
@@ -76,19 +77,31 @@ public:
 		return x.a;
 	}
 
-	inline bool operator()(const element& left,const element& right)
+	inline bool operator()(const element& left,const element& right) const
 	{
-		return left.a == right.a;
+		return left.a < right.a;
+	}
+
+	inline bool operator==(const element& other) const
+	{
+		return a == other.a;
 	}
 
 	void print() const
 	{
-		printf("        %p %s: a=%d b=%d name=%p\n",
-				this, name.c_str(), a, b, name.c_str());
+		printf("        %p %s: a=%d b=%d len=%lu name=%p\n",
+				this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 };
 
-static set<element, element> elements;
+static element func()
+{
+	printf("> func()\n");
+	element result = element("Return value optimization", 0, 4711);
+	return result;
+}
+
+static unordered_set<element, element> elements;
 static unordered_set<int> numbers;
 
 static void test()
@@ -107,6 +120,8 @@ static void test()
 	elements.insert(d);
 	elements.insert(e);
 	elements.insert(std::move(f));
+	elements.insert(element("Acht a", 8, 81));
+	elements.insert(element("Acht b", 8, 82));
 	elements.insert(element("Neun", 9, 92));
 	elements.emplace("Sechs (empl)", 6, 96);
 	elements.emplace("Sieben (empl)", 3, 192);
@@ -115,17 +130,25 @@ static void test()
 
 int main()
 {
+	printf(">>>main()\n");
+	printf(">>func()\n");
+	element result = func();
+	printf("<<func()\n");
+
 	printf(">>test()\n");
 	test();
 	printf("<<test()\n");
 
+	printf(">>dump\n");
 	for (const element &e : elements)
 	{
 		e.print();
 	}
+	printf("<<dump\n");
 
 	printf(">>clear()\n");
 	elements.clear();
 	printf("<<clear()\n");
+	printf("<<<main()\n");
 	return 0;
 }
