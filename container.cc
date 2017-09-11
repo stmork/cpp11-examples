@@ -74,12 +74,12 @@ public:
 
 	inline size_t operator()(const element & x) const noexcept
 	{
-		return x.a;
+		return std::hash<int>()(x.a);
 	}
 
 	inline bool operator()(const element& left,const element& right) const
 	{
-		return left.a < right.a;
+		return left.a == right.a;
 	}
 
 	inline bool operator==(const element& other) const
@@ -101,7 +101,7 @@ static element func()
 	return result;
 }
 
-static unordered_set<element, element> elements;
+static unordered_set<element, element, element> elements;
 static unordered_set<int> numbers;
 
 static void test()
