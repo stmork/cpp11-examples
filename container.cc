@@ -1,5 +1,5 @@
 /**
- * @file    $Id$
+ * $Id$
  * $Revision$
  * $Date$
  * $Author$
