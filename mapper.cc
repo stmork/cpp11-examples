@@ -9,21 +9,19 @@
 #include <unordered_map>
 #include <iostream>
 
-class FlagMapper
+class FlagMapper : protected std::unordered_map<uint32_t, std::string>
 {
-	std::unordered_map<uint32_t, std::string> map;
-
 public:
-	FlagMapper(std::initializer_list<std::pair<const uint32_t, std::string> > list) : map(list)
+	FlagMapper(std::initializer_list<std::pair<const uint32_t, std::string> > list) : std::unordered_map<uint32_t, std::string>(list)
 	{
 
 	}
 
-	inline const std::string get(uint32_t key)
+	inline const std::string get(const uint32_t key)
 	{
-		std::unordered_map<uint32_t, std::string>::const_iterator it = map.find(key);
+		std::unordered_map<uint32_t, std::string>::const_iterator it = find(key);
 
-		return it != map.end() ? it->second : "Blah!";
+		return it != end() ? it->second : "Blah!";
 	}
 };
 
