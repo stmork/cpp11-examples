@@ -1,7 +1,7 @@
-CXXFLAGS	+= -std=c++14
-CXXFLAGS	+= -O3
-SRC		 = container.cc exception.cc regex.cc constructor.cc hash.cc mapper.cc
-PRGS		 = container exception regex  constructor hash mapper
+CXXFLAGS += -std=c++14
+CXXFLAGS += -O3
+SRC       = container.cc exception.cc regex.cc constructor.cc hash.cc mapper.cc sharedptr.cc
+PRGS      = container exception regex  constructor hash mapper sharedptr
 
 all:	$(PRGS)
 
@@ -24,6 +24,9 @@ constructor:	constructor.o
 	$(LINK.cc) -o $@ $^
 
 mapper:	mapper.o
+	$(LINK.cc) -o $@ $^
+
+sharedptr:	sharedptr.o
 	$(LINK.cc) -o $@ $^
 
 -include .dep
