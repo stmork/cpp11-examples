@@ -1,7 +1,8 @@
 CXXFLAGS += -std=c++14
 CXXFLAGS += -O3
-SRC       = container.cc exception.cc regex.cc constructor.cc hash.cc mapper.cc sharedptr.cc
-PRGS      = container exception regex  constructor hash mapper sharedptr
+SRC       = container.cc set.cc exception.cc regex.cc constructor.cc hash.cc\
+	mapper.cc sharedptr.cc
+PRGS      = container set exception regex constructor hash mapper sharedptr
 
 all:	$(PRGS)
 
@@ -12,6 +13,9 @@ clean:
 	rm -rf *.o $(PRGS)
 
 container:	container.o
+	$(LINK.cc) -o $@ $^
+
+set:	set.o
 	$(LINK.cc) -o $@ $^
 
 exception:	exception.o
