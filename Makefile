@@ -1,4 +1,4 @@
-CXXFLAGS += -std=c++14
+CXXFLAGS += -Wall -Wextra -fstack-protector-strong -std=c++14
 CXXFLAGS += -O3
 SRC       = container.cc set.cc exception.cc regex.cc constructor.cc hash.cc\
 	mapper.cc sharedptr.cc
