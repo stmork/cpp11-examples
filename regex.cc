@@ -16,7 +16,7 @@ class Parser
 	static const string REGEX;
 
 public:
-	void Parse(const string input) const
+	void Parse(const string & input) const
 	{
 		regex  pattern(REGEX, regex_constants::ECMAScript);
 		smatch matcher;
@@ -32,7 +32,11 @@ public:
 	}
 };
 
+#if 0
 const string Parser::REGEX(":[0..9a..fA..F]{2}");
+#else
+const string Parser::REGEX(":[[:xdigit:]]{2}$");
+#endif
 
 int main()
 {
@@ -42,6 +46,9 @@ int main()
 
 		parser.Parse("BB");
 		parser.Parse(":AA");
+		parser.Parse(":aa");
+		parser.Parse(":AX");
+		parser.Parse(":12");
 		parser.Parse(":11 22 33 AB XX");
 		parser.Parse(":11 cd 33 AB f8");
 		parser.Parse(":11 22 33\n");
