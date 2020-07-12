@@ -27,7 +27,7 @@ unsigned compute_hash(functype func)
 	return (converted >> 2) % BUCKET_COUNT;
 }
 
-bool insert(hashset *h, functype func)
+bool insert(hashset * h, functype func)
 {
 	const unsigned hash = compute_hash(func);
 
@@ -50,7 +50,7 @@ bool insert(hashset *h, functype func)
 	return false;
 }
 
-bool contains(hashset *h, functype func)
+bool contains(hashset * h, functype func)
 {
 	const unsigned hash = compute_hash(func);
 
@@ -72,9 +72,9 @@ bool contains(hashset *h, functype func)
 	return false;
 }
 
-void iterate(const hashset *set)
+void iterate(const hashset * set)
 {
-	for (unsigned i = 0; i < BUCKET_COUNT;i++)
+	for (unsigned i = 0; i < BUCKET_COUNT; i++)
 	{
 		printf("%2u:\n", i);
 		for (unsigned k = 0; k < BUCKET_SIZE; k++)

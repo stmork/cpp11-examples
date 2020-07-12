@@ -53,7 +53,7 @@ int main()
 		parser.Parse(":11 cd 33 AB f8");
 		parser.Parse(":11 22 33\n");
 	}
-	catch (const regex_error &e)
+	catch (const regex_error & e)
 	{
 		cout << "regex_error caught: " << e.what() << endl;
 

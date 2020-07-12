@@ -37,8 +37,8 @@ public:
 	// =======
 	// We can use the better technique of deleting the methods
 	// we don't want.
-	S(S const&) = delete;
-	void operator=(S const&) = delete;
+	S(S const &) = delete;
+	void operator=(S const &) = delete;
 
 	// Note: Scott Meyers mentions in his Effective Modern
 	//       C++ book, that deleted functions should generally
@@ -48,8 +48,8 @@ public:
 };
 
 int main(
-		[[gnu::unused]] int argc,
-		[[gnu::unused]] char * argv [] )
+	[[gnu::unused]] int argc,
+	[[gnu::unused]] char * argv [] )
 {
 	S & s1 = S::getInstance();
 	S & s2 = S::getInstance();

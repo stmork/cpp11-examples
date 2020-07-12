@@ -29,9 +29,9 @@ typedef FlagMapper flag_map;
 
 flag_map mapper =
 {
-		{ 18, "Isabella" },
-		{ 19, "Steffen" },
-		{ 29, "Marion" }
+	{ 18, "Isabella" },
+	{ 19, "Steffen" },
+	{ 29, "Marion" }
 };
 
 using std::cout;

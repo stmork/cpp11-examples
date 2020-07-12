@@ -19,13 +19,13 @@ using namespace std;
 class TestException : public std::runtime_error
 {
 public:
-	explicit TestException(const string &text) : std::runtime_error(text)
+	explicit TestException(const string & text) : std::runtime_error(text)
 	{
 	}
 
 };
 
-static const string format(const char* message, ...)
+static const string format(const char * message, ...)
 {
 	char buffer[1024];
 
@@ -39,7 +39,7 @@ static const string format(const char* message, ...)
 
 	if (errno != 0)
 	{
-		const char *result = strerror_r(errno, buffer, sizeof(buffer));
+		const char * result = strerror_r(errno, buffer, sizeof(buffer));
 
 		if (result == nullptr)
 		{
@@ -82,7 +82,7 @@ int main()
 	{
 		intermediate2();
 	}
-	catch(std::runtime_error &e)
+	catch (std::runtime_error & e)
 	{
 		fprintf(stderr, "Fehler: %s\n", e.what());
 	}

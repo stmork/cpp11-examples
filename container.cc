@@ -34,7 +34,7 @@ public:
 		this->a    = e.a;
 		this->b    = e.b;
 		printf("x'tor() %p %s: a=%d b=%d len=%lu name=%p\n",
-				this, name.c_str(), a, b, name.length(), name.c_str());
+			this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 
 	element(element && e)
@@ -44,7 +44,7 @@ public:
 		this->b    = e.b;
 		e.b = 0;
 		printf("m'tor() %p %s: a=%d b=%d len=%lu name=%p\n",
-				this, name.c_str(), a, b, name.length(), name.c_str());
+			this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 
 	element(string name, int a, int b)
@@ -53,22 +53,22 @@ public:
 		this->a    = a;
 		this->b    = b;
 		printf("c'tor() %p %s: a=%d b=%d len=%lu name=%p\n",
-				this, name.c_str(), a, b, name.length(), name.c_str());
+			this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 
 	virtual ~element()
 	{
 		printf("d'tor() %p %s: a=%d b=%d len=%lu name=%p\n",
-				this, name.c_str(), a, b, name.length(), name.c_str());
+			this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 
-	element &operator=(element && other)
+	element & operator=(element && other)
 	{
 		name = std::move(other.name);
 		a = other.a;
 		b = other.b;
 		printf("m=op()  %p %s: a=%d b=%d len=%lu name=%p\n",
-				this, name.c_str(), a, b, name.length(), name.c_str());
+			this, name.c_str(), a, b, name.length(), name.c_str());
 		return *this;
 	}
 
@@ -77,12 +77,12 @@ public:
 		return std::hash<int>()(x.a);
 	}
 
-	inline bool operator()(const element& left,const element& right) const
+	inline bool operator()(const element & left, const element & right) const
 	{
 		return left.a == right.a;
 	}
 
-	inline bool operator==(const element& other) const
+	inline bool operator==(const element & other) const
 	{
 		return a == other.a;
 	}
@@ -90,7 +90,7 @@ public:
 	void print() const
 	{
 		printf("        %p %s: a=%d b=%d len=%lu name=%p\n",
-				this, name.c_str(), a, b, name.length(), name.c_str());
+			this, name.c_str(), a, b, name.length(), name.c_str());
 	}
 };
 
@@ -140,7 +140,7 @@ int main()
 	printf("<<test()\n");
 
 	printf(">>dump\n");
-	for (const element &e : elements)
+	for (const element & e : elements)
 	{
 		e.print();
 	}
