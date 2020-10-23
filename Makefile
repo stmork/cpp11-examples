@@ -1,9 +1,9 @@
 CXXFLAGS += -Wall -Wextra -fstack-protector-strong -std=c++14
 CXXFLAGS += -O3
 SRC       = container.cc set.cc exception.cc regex.cc constructor.cc hash.cc\
-	mapper.cc sharedptr.cc units.cc singleton.cc
+	mapper.cc sharedptr.cc units.cc singleton.cc string.cc
 PRGS      = container set exception regex constructor hash mapper\
-	sharedptr units singleton
+	sharedptr units singleton string
 
 all:	$(PRGS)
 
@@ -38,6 +38,9 @@ sharedptr:	sharedptr.o
 	$(LINK.cc) -o $@ $^
 
 singleton:	singleton.o
+	$(LINK.cc) -o $@ $^
+
+string:	string.o
 	$(LINK.cc) -o $@ $^
 
 -include .dep
