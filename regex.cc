@@ -52,6 +52,18 @@ int main()
 		parser.Parse(":11 22 33 AB XX");
 		parser.Parse(":11 cd 33 AB f8");
 		parser.Parse(":11 22 33\n");
+
+		string input("123 2PCMU/8000");
+		regex  rtpmap_regex("^(\\d{1,3})\\s+(\\w+)\\/(\\d+)", regex_constants::ECMAScript);
+		smatch match;
+
+		regex_match(input, match, rtpmap_regex);
+
+		cout << "Size:" << match.size() << endl;
+		for (const string & token : match)
+		{
+			cout << token << endl;
+		}
 	}
 	catch (const regex_error & e)
 	{
