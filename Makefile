@@ -1,9 +1,9 @@
-CXXFLAGS += -Wall -Wextra -fstack-protector-strong -std=c++14
+CXXFLAGS += -Wall -Wextra -fstack-protector-strong -std=c++17
 CXXFLAGS += -O3
 SRC       = container.cc set.cc exception.cc regex.cc constructor.cc hash.cc\
-	mapper.cc sharedptr.cc units.cc singleton.cc string.cc
+	mapper.cc sharedptr.cc units.cc singleton.cc string.cc enum.cc
 PRGS      = container set exception regex constructor hash mapper\
-	sharedptr units singleton string
+	sharedptr units singleton string enum
 
 all:	$(PRGS)
 
@@ -41,6 +41,9 @@ singleton:	singleton.o
 	$(LINK.cc) -o $@ $^
 
 string:	string.o
+	$(LINK.cc) -o $@ $^
+
+enum:	enum.o
 	$(LINK.cc) -o $@ $^
 
 -include .dep
