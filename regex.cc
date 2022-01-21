@@ -13,57 +13,80 @@ using namespace std;
 
 class Parser
 {
-	static const string REGEX;
+	std::regex regex;
 
 public:
-	void Parse(const string & input) const
+	Parser(const string & pattern) : regex(pattern, regex_constants::ECMAScript)
 	{
-		regex  pattern(REGEX, regex_constants::ECMAScript);
+	}
+
+	void Search(const string & input) const
+	{
 		smatch matcher;
 
-		if (regex_search(input, matcher, pattern))
+		if (regex_search(input, matcher, regex))
 		{
-			cout << "Match:    " << input << endl;
+			cout << "Found:     " << input << endl;
+		}
+		else
+		{
+			cout << "Not found: " << input << endl;
+		}
+	}
+
+	void Match(const string & input) const
+	{
+		smatch matcher;
+
+		if (regex_match(input, matcher, regex))
+		{
+			cout << "Found " << matcher.size() << " matches." << endl;
+			for(size_t i = 0; i < matcher.size(); i++)
+			{
+				cout << "   " << matcher[i] << endl;
+			}
 		}
 		else
 		{
 			cout << "No match: " << input << endl;
 		}
 	}
+
+	void SearchMatch(const string & input) const
+	{
+		cout << "========= Input: " << input << endl;
+		Search(input);
+		Match(input);
+	}
 };
 
 #if 0
-const string Parser::REGEX(":[0..9a..fA..F]{2}");
+const string REGEX(":[0..9a..fA..F]{2}");
 #else
-const string Parser::REGEX(":[[:xdigit:]]{2}$");
+const string REGEX(":[[:xdigit:]]{2}$");
 #endif
 
 int main()
 {
 	try
 	{
-		Parser parser;
+		Parser parser(REGEX);
 
-		parser.Parse("BB");
-		parser.Parse(":AA");
-		parser.Parse(":aa");
-		parser.Parse(":AX");
-		parser.Parse(":12");
-		parser.Parse(":11 22 33 AB XX");
-		parser.Parse(":11 cd 33 AB f8");
-		parser.Parse(":11 22 33\n");
+		parser.Search("BB");
+		parser.Search(":AA");
+		parser.Search(":aa");
+		parser.Search(":AX");
+		parser.Search(":12");
+		parser.Search(":11 22 33 AB XX");
+		parser.Search(":11 cd 33 AB f8");
+		parser.Search(":11 22 33\n");
 
-		string input("123 2PCMU/8000");
-		regex  rtpmap_regex("^(\\d{1,3})\\s+(\\w+)\\/(\\d+)", regex_constants::ECMAScript);
-		smatch match;
-
-		regex_match(input, match, rtpmap_regex);
-
-		cout << "Size:" << match.size() << endl;
-		for (const string & token : match)
-		{
-			cout << token << endl;
-		}
+		// https://regex101.com/
+		Parser rtpmap(R"(^(\d{1,3})\s+(\w+)\/(\d+))");
+	
+		rtpmap.SearchMatch("123 PCMU/8000");
+ 		rtpmap.SearchMatch("123 PCMU/80x00");
+ 		rtpmap.SearchMatch("123 2PCMU/8000");
 	}
 	catch (const regex_error & e)
 	{
