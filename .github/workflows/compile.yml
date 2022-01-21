@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name make
+    - name: make depend
       run: make depend
     - name: make
-      run: make
+      run: make -j 2
