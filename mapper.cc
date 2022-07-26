@@ -1,10 +1,5 @@
-/**
- * $Id$
- * $Revision$
- * $Date$
- * $Author$
- * @brief   STL container reference behaviour.
- */
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 
 #include <unordered_map>
 #include <iostream>

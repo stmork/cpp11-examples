@@ -1,10 +1,5 @@
-/**
- * $Id$
- * $Revision$
- * $Date$
- * $Author$
- * @brief   STL excpeption example.
- */
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 
 #include <stdio.h>
 #include <iostream>

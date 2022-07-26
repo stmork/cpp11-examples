@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+
 CXXFLAGS += -Wall -Wextra -fstack-protector-strong -std=c++17
 CXXFLAGS += -O3
 SRC       = container.cc set.cc exception.cc regex.cc constructor.cc hash.cc\

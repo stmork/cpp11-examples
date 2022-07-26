@@ -1,10 +1,5 @@
-/**
- * $Id$
- * $Revision$
- * $Date$
- * $Author$
- * @brief   Simple hash implementation.
- */
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 
 #include <stdio.h>
 #include <stdint.h>
