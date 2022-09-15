@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <stdexcept>
 
+/**
+ * This base class shows if the constructor or destructor was called.
+ */
 class Base
 {
 public:
@@ -19,13 +22,20 @@ public:
 	}
 };
 
+/**
+ * This class show what happens if an exeption is thrown inside
+ * the constructor.
+ */
 class Derived : public Base
 {
 public:
-	Derived()
+	explicit Derived(const bool throw_it = false)
 	{
 		printf("c'tor() Derived\n");
-		throw std::runtime_error("Exception absichtig geworfen!");
+		if (throw_it)
+		{
+			throw std::runtime_error("Exception absichtig geworfen!");
+		}
 	}
 
 	virtual ~Derived()
@@ -37,6 +47,7 @@ public:
 int main()
 {
 	Derived object;
+	Derived thrower(true);
 
 	printf("Live time...\n");
 
