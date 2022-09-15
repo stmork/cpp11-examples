@@ -29,6 +29,11 @@ public:
 class Derived : public Base
 {
 public:
+	/**
+	 * @brief Construct a new Derived object.
+	 *
+	 * @param throw_it If an exception should be thrown or not.
+	 */
 	explicit Derived(const bool throw_it = false)
 	{
 		printf("c'tor() Derived\n");
