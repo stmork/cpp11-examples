@@ -6,7 +6,27 @@
 #include <stdexcept>
 #include <memory>
 
-class A
+template<class T> class SharedPtrThis
+{
+	std::shared_ptr<T> self;
+
+public:
+	SharedPtrThis<T>() : self((T *)this, &noop)
+	{
+	}
+
+	operator const std::shared_ptr<T> &() const
+	{
+		return self;
+	}
+
+	static void noop(T * ptr)
+	{
+		(void)ptr;
+	}
+};
+
+class A : public std::enable_shared_from_this<A>
 {
 public:
 	A()
@@ -17,6 +37,20 @@ public:
 	virtual ~A()
 	{
 		printf("~A()\n");
+	}
+};
+
+class D : public SharedPtrThis<D>
+{
+public:
+	D()
+	{
+		printf("D()\n");
+	}
+
+	virtual ~D()
+	{
+		printf("~D()\n");
 	}
 };
 
@@ -46,6 +80,7 @@ class C
 {
 	std::shared_ptr<B> b;
 	std::shared_ptr<A> a;
+	std::shared_ptr<D> d;
 
 public:
 	C()
@@ -62,11 +97,33 @@ public:
 		printf("C b=%ld\n", b.use_count());
 		printf("~C()\n");
 	}
+
+	void assign(std::shared_ptr<A> a_ptr)
+	{
+		printf("Assign A\n");
+		a = a_ptr;
+	}
+
+	void assign(std::shared_ptr<D> d_ptr)
+	{
+		printf("Assign D\n");
+		d = d_ptr;
+	}
 };
 
 int main()
 {
+	A a;
+	D d;
 	C c;
 
+	printf("Make shared_ptr instance...\n");
+	std::shared_ptr<A> a_ptr = std::make_shared<A>();
+
+	printf("Getting std shared this...\n");
+	c.assign(a_ptr->shared_from_this());
+
+	printf("Getting my shared this...\n");
+	c.assign(d);
 	return EXIT_SUCCESS;
 }
