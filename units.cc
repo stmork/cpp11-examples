@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 
 #include <iostream>
+#include <sstream>
 #include <stdlib.h>
 
 using namespace std;
@@ -18,6 +19,14 @@ public:
 	void Print() const
 	{
 		cout << value << "Hz\n";
+	}
+
+	operator std::string () const
+	{
+		std::ostringstream strs;
+
+		strs << value;
+		return strs.str() + "Hz";
 	}
 
 	constexpr operator long double() const
@@ -57,5 +66,8 @@ int main()
 	Frequency(44.1_kHz).Print();
 	Frequency(0.0441_MHz).Print();
 
+	const std::string & out = Frequency(48.0_kHz);
+
+	cout << out << std::endl;
 	return EXIT_SUCCESS;
 }
