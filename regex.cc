@@ -36,7 +36,7 @@ public:
 		if (regex_match(input, matcher, regex))
 		{
 			cout << "Found " << matcher.size() << " matches." << endl;
-			for(size_t i = 0; i < matcher.size(); i++)
+			for (size_t i = 0; i < matcher.size(); i++)
 			{
 				cout << "   " << matcher[i] << endl;
 			}
@@ -78,10 +78,10 @@ int main()
 
 		// https://regex101.com/
 		Parser rtpmap(R"(^(\d{1,3})\s+(\w+)\/(\d+))");
-	
+
 		rtpmap.SearchMatch("123 PCMU/8000");
- 		rtpmap.SearchMatch("123 PCMU/80x00");
- 		rtpmap.SearchMatch("123 2PCMU/8000");
+		rtpmap.SearchMatch("123 PCMU/80x00");
+		rtpmap.SearchMatch("123 2PCMU/8000");
 	}
 	catch (const regex_error & e)
 	{

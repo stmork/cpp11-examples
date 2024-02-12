@@ -53,7 +53,7 @@ float rsqrt(const float input)
 	return 1.0 / sqrt(input);
 }
 
-int main(int argc, char *argv [])
+int main(int argc, char * argv [])
 {
 	for (int i = 1; i < argc; i++)
 	{

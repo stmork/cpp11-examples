@@ -15,7 +15,7 @@ public:
 	{
 	}
 
-	operator const std::shared_ptr<T> &() const
+	operator const std::shared_ptr<T> & () const
 	{
 		return self;
 	}
