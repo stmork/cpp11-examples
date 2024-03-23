@@ -4,9 +4,9 @@
 CXXFLAGS += -Wall -Wextra -fstack-protector-strong -std=c++17
 CXXFLAGS += -O3
 SRC       = container.cc set.cc exception.cc regex.cc constructor.cc hash.cc queue.cc\
-	mapper.cc sharedptr.cc units.cc singleton.cc string.cc enum.cc rsqrt.cc cv.cc
+	lut.cc mapper.cc sharedptr.cc units.cc singleton.cc string.cc enum.cc rsqrt.cc cv.cc
 PRGS      = container set exception regex constructor hash mapper queue\
-	sharedptr units singleton string enum rsqrt cv
+	lut sharedptr units singleton string enum rsqrt cv
 
 all:	$(PRGS)
 
@@ -34,7 +34,7 @@ regex:	regex.o
 constructor:	constructor.o
 	$(LINK.cc) -o $@ $^
 
-units:	units.o
+lut:	lut.o
 	$(LINK.cc) -o $@ $^
 
 mapper:	mapper.o
@@ -53,6 +53,9 @@ enum:	enum.o
 	$(LINK.cc) -o $@ $^
 
 rsqrt:	rsqrt.o
+	$(LINK.cc) -o $@ $^
+
+units:	units.o
 	$(LINK.cc) -o $@ $^
 
 cv:	cv.o
