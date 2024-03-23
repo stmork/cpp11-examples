@@ -6,7 +6,7 @@
 #include <math.h>
 #include <cstdint>
 
-static const float threehalfs = 1.5F;
+static constexpr float threehalfs = 1.5F;
 
 /*
  * https://en.wikipedia.org/wiki/Fast_inverse_square_root
@@ -48,7 +48,7 @@ float SM_rsqrt(const float number)
 	return fb.f;
 }
 
-float rsqrt(const float input)
+constexpr float rsqrt(const float input)
 {
 	return 1.0 / sqrt(input);
 }

@@ -22,7 +22,7 @@ public:
 
 typedef FlagMapper flag_map;
 
-flag_map mapper =
+flag_map mapper
 {
 	{ 18, "Isabella" },
 	{ 19, "Steffen" },
