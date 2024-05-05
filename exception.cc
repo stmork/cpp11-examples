@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2022 - 2024 Steffen A. Mork
 
-#include <stdio.h>
+#include <cstdio>
 #include <iostream>
 #include <set>
 #include <stdexcept>
