@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2022 - 2024 Steffen A. Mork
 
-#include <stdio.h>
-#include <stdint.h>
-#include <strings.h>
+#include <cstdio>
+#include <cstdint>
+#include <string>
 
 #define BUCKET_COUNT 19
 #define BUCKET_SIZE  8
@@ -12,7 +12,7 @@ typedef void * functype;
 
 struct hashset
 {
-	functype entries[BUCKET_COUNT][BUCKET_SIZE];
+	functype entries[BUCKET_COUNT][BUCKET_SIZE] {};
 };
 
 unsigned compute_hash(functype func)
@@ -99,8 +99,6 @@ void test2()
 int main()
 {
 	struct hashset set;
-
-	bzero(&set, sizeof set);
 
 	insert(&set, (functype)insert);
 	insert(&set, (functype)contains);
