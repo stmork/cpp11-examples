@@ -30,18 +30,17 @@ float Q_rsqrt( float number )
 
 union FloatBits
 {
-	float    f;
-	uint32_t i;
+	float  f;
+	long   i;
 };
 
 float SM_rsqrt(const float number)
 {
 	float     x2;
-	FloatBits fb;
+	FloatBits fb{.f = number};
 
 	x2   = number * 0.5F;
-	fb.f = number;
-	fb.i = 0x5f3759df - (fb.i >> 1);               // what the fuck?
+	fb.i = 0x5f3759df - (fb.i >> 1);                   // what the fuck?
 	fb.f = fb.f * (threehalfs - (x2 * fb.f * fb.f));   // 1st iteration
 	fb.f = fb.f * (threehalfs - (x2 * fb.f * fb.f));   // 2nd iteration, this can be removed
 
