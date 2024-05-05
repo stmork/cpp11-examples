@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 
 #include <unordered_map>
+#include <cstdint>
 #include <iostream>
 
 class FlagMapper : protected std::unordered_map<uint32_t, std::string>

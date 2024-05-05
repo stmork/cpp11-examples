@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2022 - 2024 Steffen A. Mork
 
-#include <stdio.h>
-#include <stdint.h>
-#include <strings.h>
+#include <cstdio>
+#include <cstdint>
+#include <string>
 
 enum Unscoped : char
 {

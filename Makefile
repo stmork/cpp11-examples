@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: Copyright (C) 2022 - 2024 Steffen A. Mork
 
-CXXFLAGS += -Wall -Wextra -fstack-protector-strong -std=c++17
-CXXFLAGS += -O3
+CFLAGS   += -Wall -Wextra -fstack-protector-strong -O3
+CXXFLAGS += $(CFLAGS) -std=c++20
+
 SRC       = container.cc set.cc exception.cc regex.cc constructor.cc hash.cc queue.cc\
 	lut.cc mapper.cc sharedptr.cc units.cc singleton.cc string.cc enum.cc rsqrt.cc cv.cc
 PRGS      = container set exception regex constructor hash mapper queue\
@@ -11,7 +12,7 @@ PRGS      = container set exception regex constructor hash mapper queue\
 all:	$(PRGS)
 
 depend:
-	$(CXX) -std=c++14 -E -M  $(SRC) $(CPPFLAGS) >.dep
+	$(CPP) -std=c++20 -E -M  $(SRC) $(CPPFLAGS) >.dep
 
 clean:
 	rm -rf *.o $(PRGS)
@@ -60,5 +61,8 @@ units:	units.o
 
 cv:	cv.o
 	$(LINK.cc) -o $@ $^ -lpthread
+
+hash:	hash.o
+	$(LINK.c) -o $@ $^ -lpthread
 
 -include .dep

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
+#include <cstdlib>
+#include <cstdio>
+#include <cmath>
 #include <cstdint>
 
 static constexpr float threehalfs = 1.5F;
