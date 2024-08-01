@@ -25,7 +25,7 @@ public:
 	Derived()
 	{
 		printf("c'tor() Derived\n");
-		throw std::runtime_error("Exception absichtig geworfen!");
+		throw std::runtime_error("Exception absichtlich geworfen!");
 	}
 
 	virtual ~Derived()
@@ -36,9 +36,19 @@ public:
 
 int main()
 {
-	Derived object;
+	try
+	{
+		Derived object_catched;
 
-	printf("Live time...\n");
+		printf("Live time...\n");
+	}
+	catch (std::exception & e)
+	{
+		fprintf(stderr, "Error: %s\n", e.what());
+	}
+
+	printf("--------------\n");
+	Derived object_terminated;
 
 	return EXIT_SUCCESS;
 }
