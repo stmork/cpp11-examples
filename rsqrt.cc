@@ -14,7 +14,7 @@ static constexpr float threehalfs = 1.5F;
 
 float Q_rsqrt( float number )
 {
-	long i;
+	long  i;
 	float x2, y;
 
 	x2 = number * 0.5F;
@@ -30,8 +30,8 @@ float Q_rsqrt( float number )
 
 union FloatBits
 {
-	float  f;
-	long   i;
+	float    f;
+	int32_t  i;
 };
 
 float SM_rsqrt(const float number)
@@ -56,9 +56,12 @@ int main(int argc, char * argv [])
 {
 	for (int i = 1; i < argc; i++)
 	{
-		float value = atof(argv[i]);
+		const float     value = atof(argv[i]);
+		const FloatBits bits { .f = value };
 
-		printf("%2.5f:  %2.5f  %2.5f  %2.5f\n", value, rsqrt(value), Q_rsqrt(value), SM_rsqrt(value));
+		printf("%2.5f = 0x%08x:  %2.5f  %2.5f  %2.5f\n",
+			bits.f, bits.i,
+			rsqrt(value), Q_rsqrt(value), SM_rsqrt(value));
 	}
 	return EXIT_SUCCESS;
 }
