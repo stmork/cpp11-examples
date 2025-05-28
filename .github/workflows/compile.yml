@@ -16,4 +16,4 @@ jobs:
     - name: make depend
       run: make depend
     - name: make
-      run: make -j 2
+      run: make -j `nproc`
