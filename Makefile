@@ -5,9 +5,9 @@ CFLAGS   += -Wall -Wextra -fstack-protector-strong -O3
 CXXFLAGS += $(CFLAGS) -std=c++20
 
 SRC       = cast.cc container.cc set.cc exception.cc regex.cc constructor.cc hash.cc queue.cc\
-	lut.cc mapper.cc sharedptr.cc units.cc singleton.cc string.cc enum.cc rsqrt.cc cv.cc
+	lut.cc mapper.cc sharedptr.cc units.cc singleton.cc string.cc enum.cc rsqrt.cc trampoline.cc cv.cc
 PRGS      = cast container set exception regex constructor hash mapper queue\
-	lut sharedptr units singleton string enum rsqrt cv
+	lut sharedptr units singleton string enum rsqrt trampoline cv
 
 all:	$(PRGS)
 
@@ -57,6 +57,9 @@ enum:	enum.o
 	$(LINK.cc) -o $@ $^
 
 rsqrt:	rsqrt.o
+	$(LINK.cc) -o $@ $^
+
+trampoline:	trampoline.o
 	$(LINK.cc) -o $@ $^
 
 units:	units.o
