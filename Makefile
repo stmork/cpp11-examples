@@ -2,12 +2,14 @@
 # SPDX-FileCopyrightText: Copyright (C) 2022 - 2025 Steffen A. Mork
 
 CFLAGS   += -Wall -Wextra -fstack-protector-strong -O3
+
 CXXFLAGS += $(CFLAGS) -std=c++20
 
 SRC       = cast.cc container.cc set.cc exception.cc regex.cc constructor.cc hash.cc queue.cc\
-	lut.cc mapper.cc sharedptr.cc units.cc singleton.cc string.cc enum.cc rsqrt.cc trampoline.cc cv.cc
+	lut.cc mapper.cc sharedptr.cc units.cc singleton.cc string.cc enum.cc rsqrt.cc\
+	trampoline.cc cv.cc format.cc
 PRGS      = cast container set exception regex constructor hash mapper queue\
-	lut sharedptr units singleton string enum rsqrt trampoline cv
+	lut sharedptr units singleton string enum rsqrt trampoline cv format
 
 all:	$(PRGS)
 
@@ -21,6 +23,9 @@ cast:	cast.o
 	$(LINK.cc) -o $@ $^
 
 container:	container.o
+	$(LINK.cc) -o $@ $^
+
+format:	format.o
 	$(LINK.cc) -o $@ $^
 
 queue:	queue.o
