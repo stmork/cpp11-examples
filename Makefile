@@ -7,9 +7,9 @@ CXXFLAGS += $(CFLAGS) -std=c++20
 
 SRC       = cast.cc container.cc set.cc exception.cc regex.cc constructor.cc hash.cc queue.cc\
 	lut.cc mapper.cc sharedptr.cc units.cc singleton.cc string.cc enum.cc rsqrt.cc\
-	trampoline.cc cv.cc format.cc
+	trampoline.cc cv.cc format.cc transform.cc
 PRGS      = cast container set exception regex constructor hash mapper queue\
-	lut sharedptr units singleton string enum rsqrt trampoline cv format
+	lut sharedptr units singleton string enum rsqrt trampoline cv format transform
 
 all:	$(PRGS)
 
@@ -65,6 +65,9 @@ rsqrt:	rsqrt.o
 	$(LINK.cc) -o $@ $^
 
 trampoline:	trampoline.o
+	$(LINK.cc) -o $@ $^
+
+transform:	transform.o
 	$(LINK.cc) -o $@ $^
 
 units:	units.o
