@@ -6,39 +6,37 @@
 #include <set>
 #include <stdexcept>
 #include <cstdarg>
-#include <string.h>
+#include <cstring>
 #include <fcntl.h>
-
-using namespace std;
 
 class TestException : public std::runtime_error
 {
 public:
-	explicit TestException(const string & text) : std::runtime_error(text)
+	explicit TestException(const std::string & text) : std::runtime_error(text)
 	{
 	}
 
 };
 
-static const string format(const char * message, ...)
+static const std::string format(const char * message, ...)
 {
 	char buffer[1024];
 
-	va_list args;
+	std::va_list args;
 
 	va_start(args, message);
-	vsnprintf(buffer, sizeof(buffer), message, args);
+	std::vsnprintf(buffer, sizeof(buffer), message, args);
 	va_end(args);
 
-	string error(buffer);
+	std::string error(buffer);
 
 	if (errno != 0)
 	{
-		const char * result = strerror_r(errno, buffer, sizeof(buffer));
+		const char * result = std::strerror(errno);
 
 		if (result == nullptr)
 		{
-			perror("Unknown error while retrieving another error text");
+			std::perror("Unknown error while retrieving another error text");
 		}
 		else
 		{
@@ -51,14 +49,14 @@ static const string format(const char * message, ...)
 
 void first()
 {
-	open("asdfsdsdf", 0);
-	throw TestException("Beispiel 1");
+	::open("asdfsdsdf", 0);
+	throw TestException("Example 1");
 }
 
 void second()
 {
-	open("asdfsdsdf", 0);
-	throw TestException(format("Beispiel %d", 2));
+	::open("asdfsdsdf", 0);
+	throw TestException(format("Example %d", 2));
 }
 
 void intermediate1()
@@ -79,7 +77,7 @@ int main()
 	}
 	catch (std::runtime_error & e)
 	{
-		fprintf(stderr, "Fehler: %s\n", e.what());
+		std::fprintf(stderr, "Error: %s\n", e.what());
 	}
 	return 0;
 }
